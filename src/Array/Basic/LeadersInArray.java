@@ -1,6 +1,6 @@
 package Array.Basic;
 
-import S00_DataStructureAlgorithms.Util.ArrayUtils;
+import Util.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
