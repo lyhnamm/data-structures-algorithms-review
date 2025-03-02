@@ -15,4 +15,10 @@ public class ArrayUtils {
     public static void printArray(List<Integer> arrList) {
         System.out.println(Arrays.toString(arrList.toArray()));
     }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 }
