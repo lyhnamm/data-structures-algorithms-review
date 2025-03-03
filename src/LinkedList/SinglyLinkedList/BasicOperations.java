@@ -40,18 +40,74 @@ public class BasicOperations {
         return 1 + countNodesRec(head.next);
     }
 
+    // Insert a new node at first of a linked list
     public static Node insertAtFirst(Node head, int new_node) {
         Node newNode = new Node(new_node);
         newNode.next = head;
         return newNode;
     }
 
+    // Insert a new node at last of a linked list
     public static Node insertAtLast(Node head, int data) {
         Node newNode = new Node(data);
         Node curr = head;
         while (curr.next != null) {
             curr = curr.next;
         }
+        curr.next = newNode;
+        return head;
+    }
+
+    // Insert a new node after a given node
+    public static Node insertAfter(Node head, int key, int data) {
+        Node curr = head;
+        while (curr.next != null) {
+            if (curr.data == key) {
+                Node newNode = new Node(data);
+                newNode.next = curr.next;
+                curr.next = newNode;
+            }
+            curr = curr.next;
+        }
+        return head;
+    }
+
+    // Insert a new node before a given node
+    public static Node insertBefore(Node head, int key, int data) {
+        if (head == null) {
+            return new Node(data);
+        }
+        if (head.data == key) {
+            return insertAtFirst(head, data);
+        }
+        Node curr = head;
+        Node prev = null;
+        while (curr.next != null && curr.data != key) {
+            prev = curr;
+            curr = curr.next;
+        }
+        Node newNode = new Node(data);
+        newNode.next = curr;
+        prev.next = newNode;
+        return head;
+    }
+
+    // Insert a new node at a specific position
+    public static Node insertAtSpecific(Node head, int pos, int data) {
+        if (pos < 1) {
+            return head;
+        }
+        if (pos == 1) {
+            return insertAtFirst(head, data);
+        }
+        int count = 1;
+        Node curr = head;
+        while (curr != null && count < pos - 1) {
+            curr = curr.next;
+            count++;
+        }
+        Node newNode = new Node(data);
+        newNode.next = curr.next;
         curr.next = newNode;
         return head;
     }
@@ -68,6 +124,13 @@ public class BasicOperations {
         traverse(head);
         head = insertAtFirst(head, 3);
         head = insertAtLast(head, 4);
+        head = insertAfter(head, 1, 5);
+        traverse(head);
+        head = insertBefore(head, 2, 6);
+        traverse(head);
+        head = insertBefore(head, 3, 7);
+        traverse(head);
+        head = insertAtSpecific(head, 4, 8);
         traverse(head);
         int countNodes = countNodesRec(head);
         System.out.println("Length of linked list is: " + countNodes);
