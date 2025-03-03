@@ -40,13 +40,34 @@ public class BasicOperations {
         return 1 + countNodesRec(head.next);
     }
 
+    public static Node insertAtFirst(Node head, int new_node) {
+        Node newNode = new Node(new_node);
+        newNode.next = head;
+        return newNode;
+    }
+
+    public static Node insertAtLast(Node head, int data) {
+        Node newNode = new Node(data);
+        Node curr = head;
+        while (curr.next != null) {
+            curr = curr.next;
+        }
+        curr.next = newNode;
+        return head;
+    }
+
     public static void main(String[] args) {
         Node head = new Node(1);
-        head.next = new Node(3);
-        head.next.next = new Node(3);
-        head.next.next.next = new Node(4);
-        head.next.next.next.next = new Node(2);
-        head.next.next.next.next.next = new Node(1);
+//        head.next = new Node(3);
+//        head.next.next = new Node(3);
+//        head.next.next.next = new Node(4);
+//        head.next.next.next.next = new Node(2);
+//        head.next.next.next.next.next = new Node(1);
+        traverse(head);
+        head = insertAtFirst(head, 2);
+        traverse(head);
+        head = insertAtFirst(head, 3);
+        head = insertAtLast(head, 4);
         traverse(head);
         int countNodes = countNodesRec(head);
         System.out.println("Length of linked list is: " + countNodes);
