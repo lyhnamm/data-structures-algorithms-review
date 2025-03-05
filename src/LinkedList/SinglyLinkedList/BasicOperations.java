@@ -112,6 +112,52 @@ public class BasicOperations {
         return head;
     }
 
+    // Delete at first in a linked list
+    public static Node deleteAtFirst(Node head) {
+        if (head == null) {
+            return null;
+        }
+        head = head.next;
+        return head;
+    }
+
+    // Delete at last in a linked list
+    public static Node deleteAtLast(Node head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
+        Node temp = head;
+        while (temp.next.next != null) {
+            temp = temp.next;
+        }
+        temp.next = null;
+        return head;
+    }
+
+    // Delete at specific position in a linked list
+    public static Node deleteAtSpecific(Node head, int pos) {
+        Node curr = head, prev = null;
+        if (head == null) {
+            return null;
+        }
+        if (head.next == null) {
+            head = curr.next;
+            return head;
+        }
+        int i = 1;
+        while (i < pos && curr != null) {
+            prev = curr;
+            curr = curr.next;
+            i++;
+        }
+        if (curr != null) {
+            prev.next = curr.next;
+        } else {
+            System.out.println("Data is not presented");
+        }
+        return head;
+    }
+
     public static void main(String[] args) {
         Node head = new Node(1);
 //        head.next = new Node(3);
@@ -132,6 +178,13 @@ public class BasicOperations {
         traverse(head);
         head = insertAtSpecific(head, 4, 8);
         traverse(head);
+        head = deleteAtFirst(head);
+        traverse(head);
+        head = deleteAtLast(head);
+        traverse(head);
+        head = deleteAtSpecific(head, 3);
+        traverse(head);
+
         int countNodes = countNodesRec(head);
         System.out.println("Length of linked list is: " + countNodes);
     }
