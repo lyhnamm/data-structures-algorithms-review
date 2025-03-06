@@ -59,17 +59,17 @@ public class BasicOperations {
     }
 
     // Insert a new node after a given node
-    public static Node insertAfter(Node head, int key, int data) {
+    public static void insertAfter(Node head, int key, int data) {
         Node curr = head;
-        while (curr.next != null) {
+        while (curr != null) {
             if (curr.data == key) {
                 Node newNode = new Node(data);
                 newNode.next = curr.next;
                 curr.next = newNode;
+                break;
             }
             curr = curr.next;
         }
-        return head;
     }
 
     // Insert a new node before a given node
@@ -82,13 +82,15 @@ public class BasicOperations {
         }
         Node curr = head;
         Node prev = null;
-        while (curr.next != null && curr.data != key) {
+        while (curr != null && curr.data != key) {
             prev = curr;
             curr = curr.next;
         }
-        Node newNode = new Node(data);
-        newNode.next = curr;
-        prev.next = newNode;
+        if (curr != null) {
+            Node newNode = new Node(data);
+            newNode.next = curr;
+            prev.next = newNode;
+        }
         return head;
     }
 
@@ -106,9 +108,11 @@ public class BasicOperations {
             curr = curr.next;
             count++;
         }
-        Node newNode = new Node(data);
-        newNode.next = curr.next;
-        curr.next = newNode;
+        if (curr != null) {
+            Node newNode = new Node(data);
+            newNode.next = curr.next;
+            curr.next = newNode;
+        }
         return head;
     }
 
@@ -160,29 +164,10 @@ public class BasicOperations {
 
     public static void main(String[] args) {
         Node head = new Node(1);
-//        head.next = new Node(3);
-//        head.next.next = new Node(3);
-//        head.next.next.next = new Node(4);
-//        head.next.next.next.next = new Node(2);
-//        head.next.next.next.next.next = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
         traverse(head);
-        head = insertAtFirst(head, 2);
-        traverse(head);
-        head = insertAtFirst(head, 3);
-        head = insertAtLast(head, 4);
-        head = insertAfter(head, 1, 5);
-        traverse(head);
-        head = insertBefore(head, 2, 6);
-        traverse(head);
-        head = insertBefore(head, 3, 7);
-        traverse(head);
-        head = insertAtSpecific(head, 4, 8);
-        traverse(head);
-        head = deleteAtFirst(head);
-        traverse(head);
-        head = deleteAtLast(head);
-        traverse(head);
-        head = deleteAtSpecific(head, 3);
+        head = insertBefore(head, 5, 4);
         traverse(head);
 
         int countNodes = countNodesRec(head);
